@@ -1,9 +1,9 @@
 #pragma once
+#include "Object.h"
 class ObjectManager
 {
 public:
-	char pad[4];
-	short size;
-
+	 Object * *m_ppUnitArray;
+	 int size;
 };
 

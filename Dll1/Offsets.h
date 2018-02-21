@@ -14,7 +14,7 @@ public:
 
 	//Offsets
 	DWORD oLocalPlayer = base + 0x31B2160;
-	ObjManager->Error
+	DWORD ObjManager = base + 0x2dac858;
 	DWORD oChatClientPtr = base + 0x31B7C98;
 	DWORD oGameTime = base + 0x31A6D24;
 	DWORD oRenderer = base + 0x31D4AA0;
