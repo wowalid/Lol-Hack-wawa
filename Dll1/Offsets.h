@@ -13,7 +13,7 @@ public:
 
 
 	//Offsets
-	DWORD oLocalPlayer = base + 0x31B2160;
+	DWORD oLocalPlayer = base + 0x2db2160;
 	DWORD ObjManager = base + 0x2dac858;
 	DWORD oChatClientPtr = base + 0x31B7C98;
 	DWORD oGameTime = base + 0x31A6D24;
@@ -41,7 +41,7 @@ public:
 	//typedef cTexturePTR(__thiscall* fnLoadTexture)(DWORD *rendererPtr, std::string* strTextureFileName, DWORD* dwSharedMemory, int a4, int a5, int a6);
 	typedef char(__thiscall* fnPrintChat)(DWORD* ChatClientPtr, const char* cMessage, unsigned int iColor);
 	typedef int(__thiscall* fnSendChat)(DWORD* ChatClientPtr, char* a2);
-	typedef void(__thiscall* fnIssueOrder) (Object* thisPtr, DWORD dwOrder, D3DVECTOR* TargetPos, Object* TargetPtr, bool attackLoc, bool isPassive, DWORD isNetworked);
+	typedef void(__thiscall* fnIssueOrder) (Object* thisPtr, DWORD dwOrder, D3DVECTOR* TargetPos, Object* TargetPtr, bool attackLoc, bool isPassive, DWORD isNetworked); // 2 = move 
 	typedef char(__thiscall* fnDrawTurretRange) (Object* objPtr);
 	typedef void(__thiscall* fnDrawHUD) (int a1);
 	typedef int(__thiscall* fnOnAFK)(BYTE* thisPtr);
