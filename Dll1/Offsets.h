@@ -13,7 +13,7 @@ public:
 
 
 	//Offsets
-	DWORD oLocalPlayer = base + 0x2db2160;
+	DWORD oLocalPlayer = base + 0x2DB2160;
 	DWORD ObjManager = base + 0x2dac858;
 	DWORD oChatClientPtr = base + 0x31B7C98;
 	DWORD oGameTime = base + 0x31A6D24;
@@ -24,7 +24,7 @@ public:
 	DWORD oMissionInfo = base + 0x31E3AEC;
 	DWORD oGameState = base + 0x31A7524;
 	DWORD oVersion = base + 0x31B5CB0;
-	DWORD oMousePointer = base + 0x1902754;
+	DWORD oMousePointer = base + 0x1502754;
 	DWORD oTexturePack = base + 0x31B2E18;
 
 
@@ -96,7 +96,7 @@ public:
 	//fnGameUpdate fnGameUpdate = (fnGameUpdate)(base + 0x7053F0);
 	//fnClientMain fnClientMain = (fnClientMain)(base + 0x680EF0);
 	fnPlaySound tPlaySound = (fnPlaySound)(base + 0x66A6B0);
-	fnIssueOrder tIssueOrder = (fnIssueOrder)(base + 0xA04C50);
+	fnIssueOrder tIssueOrder = (fnIssueOrder)(base + 0x1C1AE0);
 	//fnHealthBarPos fnHealthBarPos = (fnHealthBarPos)(base + 0x5BA900);
 	fnGetAttackDelay tGetAttackDelay = (fnGetAttackDelay)(base + 0x934040);
 	fnGetAttackCastDelay tGetAttackCastDelay = (fnGetAttackCastDelay)(base + 0x9340A0);

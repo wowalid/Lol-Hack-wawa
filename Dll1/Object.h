@@ -1,12 +1,13 @@
 #pragma once
 #include <iostream>
+#include "String.h"
 class Object
 {
 public:
 	unsigned char Padding0[0x20]; // 0x00
 	//int Champion; // 0x18
 	//unsigned char Padding1000[0x02];
-	char* Name; //0x20
+	String Name; //0x20
 	unsigned char Padding1[0x2B0]; // 0x1C
 	float mPAR; // 0x2CC
 	unsigned char Padding2[0x0C]; // 0x2D0
