@@ -43,7 +43,8 @@ public:
 
 	unsigned char Padding[0x4];
 	ObjectType* Type;
-	unsigned char Padding34[0xC];
+	int Index;
+	unsigned char Padding34[0x8];
 	int Team; // 100 = allies , 200 = ennemies , 300 = neutre
 	unsigned char Padding35[0x8];
 	cString Name;

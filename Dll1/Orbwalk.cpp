@@ -9,7 +9,9 @@ void Orbwalker::Attack(Object * target, bool isMinion)
 	Offsets *offsets = new Offsets();
 	D3DVECTOR* vec = new D3DVECTOR(target->X, target->Y, target->Z);
 	if (target!=nullptr) {
-		offsets->tIssueOrder(this->player, 3, vec, target, 1, isMinion, true);
+		
+		//offsets->tIssueOrder(this->player, 10, nullptr, nullptr, 0, 0, 0);
+		offsets->tIssueOrder(this->player, 3, vec, target, 1, isMinion, 0);
 	}
 	
 }
@@ -45,6 +47,7 @@ float Orbwalker::Distance(Object* A, Object* B) {
 
 std::vector<Object*> Orbwalker::getAttackableUnitInRange()
 {
+	Offsets *offsets = new Offsets();
 	std::vector<Object*> objets;
 	float dist = 100000;
 	for (int i = 0; i < 10000; i++) {
@@ -64,7 +67,10 @@ std::vector<Object*> Orbwalker::getAttackableUnitInRange()
 						if ((obj->Type->Type == 5 || obj->Type->Type == 3) && (obj->Team == 300||obj->Team==200)) {
 							objets.push_back(obj);
 							cout << "Name : " << nom << endl;
+							float Delay = offsets->tGetAttackDelay(obj, i);
+							cout << "Attackdelay : " << Delay << endl;
 							cout << "Team : " << obj->Team << endl;
+							cout << "Index : " << obj->Index << endl;
  							cout << "X : " << obj->X << endl;
 							cout << "Y : " << obj->Y << endl;
 							cout << "Z : " << player->Z << endl;
@@ -81,5 +87,8 @@ std::vector<Object*> Orbwalker::getAttackableUnitInRange()
 	}
 	cout << "Team : " << player->Team << endl;
 	cout << "Taille : " << objets.size() << endl;
+	cout << "Index : " << player->Index << endl;
+	float Delay = offsets->tGetAttackDelay(player, 1);
+	cout << "Attackdelay : " << Delay << endl;
 	return objets;
 }

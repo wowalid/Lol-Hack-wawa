@@ -95,8 +95,8 @@ public:
 	fnPlaySound tPlaySound = (fnPlaySound)(base + 0x66A6B0);
 	fnIssueOrder tIssueOrder = (fnIssueOrder)(base + 0x1C1AE0);
 	//fnHealthBarPos fnHealthBarPos = (fnHealthBarPos)(base + 0x5BA900);
-	fnGetAttackDelay tGetAttackDelay = (fnGetAttackDelay)(base + 0x934040);
-	fnGetAttackCastDelay tGetAttackCastDelay = (fnGetAttackCastDelay)(base + 0x9340A0);
+	fnGetAttackDelay tGetAttackDelay = (fnGetAttackDelay)(base + 0x534040);
+	fnGetAttackCastDelay tGetAttackCastDelay = (fnGetAttackCastDelay)(base + 0x5340A0);
 	//fnGetBasicAttack fnGetBasicAttack = (fnGetBasicAttack)(base + 0x5B97C0);
 	fnGetBoundingRadius tGetBoundingRadius = (fnGetBoundingRadius)(base + 0x5EE1C0);
 	//fnAddRemoveBuff fnAddRemoveBuff = (fnAddRemoveBuff)(base + 0x910570);
