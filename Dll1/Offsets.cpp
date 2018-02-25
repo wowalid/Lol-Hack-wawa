@@ -3,10 +3,3 @@
 
 
 
-Offsets::Offsets()
-{
-}
-
-Offsets::~Offsets()
-{
-}

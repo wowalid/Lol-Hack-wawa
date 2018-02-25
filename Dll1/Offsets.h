@@ -6,12 +6,9 @@
 class Offsets
 {
 public:
-	Offsets();
-	~Offsets();
 
 	DWORD base = (DWORD)GetModuleHandle(NULL);
-
-
+	
 	//Offsets
 	DWORD oLocalPlayer = base + 0x2DB2160;
 	DWORD ObjManager = base + 0x2dac858;

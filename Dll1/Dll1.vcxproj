@@ -148,6 +148,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="D3DVECTOR.h" />
+    <ClInclude Include="Memory.h" />
     <ClInclude Include="MousePointer.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectManager.h" />
@@ -163,6 +164,7 @@
     <ClCompile Include="D3DVECTOR.cpp" />
     <ClCompile Include="Dll1.cpp" />
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="Memory.cpp" />
     <ClCompile Include="MousePointer.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectManager.cpp" />

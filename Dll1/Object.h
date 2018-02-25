@@ -1,10 +1,71 @@
 #pragma once
 #include <iostream>
 #include "String.h"
+#include "Memory.h"
+class cString
+{
+public:
+	char *getString()
+	{
+		if (this->m_iLen > 15)
+			return (this->m_szString);
+
+		return (this->m_caString);
+	}
+
+private:
+	union
+	{
+		struct
+		{
+			/* 0x00000000 */ char m_caString[0x10];
+		};
+
+		struct
+		{
+			/* 0x00000000 */ char *m_szString;
+			/* 0x00000004 */ char m_notUse[0x0C];
+		};
+	};
+
+	/* 0x00000010 */ int m_iLen;
+	/* 0x00000014 */ int m_iMax;
+};
+
+class ObjectType {
+public :
+	int Type;
+};
+
 class Object
 {
 public:
+
+	unsigned char Padding[0x4];
+	ObjectType* Type;
+	unsigned char Padding34[0xC];
+	int Team; // 100 = allies , 200 = ennemies , 300 = neutre
+	unsigned char Padding35[0x8];
+	cString Name;
+	unsigned char Padding0[0xC8];
+	float X; //0x100
+	float Y; 
+	float Z; 
+	unsigned char Padding2[0x56C];
+	float mHP;
+	unsigned char Padding3[0x538];
+	float AttackRange; //0xAA8
+
+	bool isMinion() {
+		if (Team == 200 && Type->Type == 5) {
+			return true;
+		}
+		return false;
+	}
+	
+	/*
 	unsigned char Padding0[0x20]; // 0x00
+
 	//int Champion; // 0x18
 	//unsigned char Padding1000[0x02];
 	String Name; //0x20
@@ -184,4 +245,5 @@ public:
 	float mMagicDamageTaken; // 0x4570
 	unsigned char Padding88[0x0C]; // 0x4574
 	float mTrueDamageTaken; // 0x4580
+	*/
 };
