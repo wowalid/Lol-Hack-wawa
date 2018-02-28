@@ -5,7 +5,7 @@ class MousePointer
 {
 public:
 	Offsets* off = new Offsets();
-	DWORD mouse = *(DWORD*)((DWORD)GetModuleHandle(NULL) + 0x1502754);
+	DWORD mouse = *(DWORD*)(off->oMousePointer);
 	float x = *(float*)(mouse + 0x90);
 	float y = *(float*)(mouse + 0x98);
 	float z = *(float*)(mouse + 0xA0);

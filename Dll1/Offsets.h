@@ -10,8 +10,8 @@ public:
 	DWORD base = (DWORD)GetModuleHandle(NULL);
 	
 	//Offsets
-	DWORD oLocalPlayer = base + 0x2DB2160;
-	DWORD ObjManager = base + 0x2dac858;
+	DWORD oLocalPlayer = base + 0x2DB1060;
+	DWORD ObjManager = base + 0x2dABF80;
 	DWORD oChatClientPtr = base + 0x31B7C98;
 	DWORD oGameTime = base + 0x31A6D24;
 	DWORD oRenderer = base + 0x31D4AA0;
@@ -21,7 +21,7 @@ public:
 	DWORD oMissionInfo = base + 0x31E3AEC;
 	DWORD oGameState = base + 0x31A7524;
 	DWORD oVersion = base + 0x31B5CB0;
-	DWORD oMousePointer = base + 0x1502754;
+	DWORD oMousePointer = base + 0x1504D80;
 	DWORD oTexturePack = base + 0x31B2E18;
 
 
@@ -93,10 +93,10 @@ public:
 	//fnGameUpdate fnGameUpdate = (fnGameUpdate)(base + 0x7053F0);
 	//fnClientMain fnClientMain = (fnClientMain)(base + 0x680EF0);
 	fnPlaySound tPlaySound = (fnPlaySound)(base + 0x66A6B0);
-	fnIssueOrder tIssueOrder = (fnIssueOrder)(base + 0x1C1AE0);
+	fnIssueOrder tIssueOrder = (fnIssueOrder)(base + 0x1C3950);
 	//fnHealthBarPos fnHealthBarPos = (fnHealthBarPos)(base + 0x5BA900);
-	fnGetAttackDelay tGetAttackDelay = (fnGetAttackDelay)(base + 0x534040);
-	fnGetAttackCastDelay tGetAttackCastDelay = (fnGetAttackCastDelay)(base + 0x5340A0);
+	fnGetAttackDelay tGetAttackDelay = (fnGetAttackDelay)(base + 0x53AB20);
+	fnGetAttackCastDelay tGetAttackCastDelay = (fnGetAttackCastDelay)(base + 0x53AC90);
 	//fnGetBasicAttack fnGetBasicAttack = (fnGetBasicAttack)(base + 0x5B97C0);
 	fnGetBoundingRadius tGetBoundingRadius = (fnGetBoundingRadius)(base + 0x5EE1C0);
 	//fnAddRemoveBuff fnAddRemoveBuff = (fnAddRemoveBuff)(base + 0x910570);
