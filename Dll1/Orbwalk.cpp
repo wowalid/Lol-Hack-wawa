@@ -146,7 +146,7 @@ void Orbwalker::LaneClear() {
 	
 	if (getAttackableUnitInRange().size() > 0) {
 		for (Object* obj : getAttackableUnitInRange()) {
-			if (obj->Champion==5121 && offsets->getClock()+0.7>= attacktimer + offsets->tGetAttackDelay(player,1)) {
+			if (obj->Champion==5121 && offsets->getClock()+0.8>= attacktimer + offsets->tGetAttackDelay(player,1)) {
 				cout << "champ :" << obj->Champion << endl;
 				cout << "champ :" << obj->Name.getString() << endl;
 				attacktimer = offsets->getClock();
