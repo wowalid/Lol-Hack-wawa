@@ -1,4 +1,2 @@
-﻿  dllmain.cpp
-c:\users\walid\source\repos\dll1\dll1\dllmain.cpp(56): warning C4018: '<' : incompatibilité signed/unsigned
-c:\users\walid\source\repos\dll1\dll1\dllmain.cpp(59): warning C4244: 'argument' : conversion de 'float' en 'DWORD', perte possible de données
+﻿  Orbwalk.cpp
   Dll1.vcxproj -> C:\Users\Walid\source\repos\Dll1\Debug\Dll1.dll

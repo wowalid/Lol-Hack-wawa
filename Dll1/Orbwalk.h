@@ -7,15 +7,14 @@ class Orbwalker
 {
 public:
 	Object * player;
-	Offsets* offsets;
+	Offsets* offsets = new Offsets();
 	Object** ObjMgr;
-	MousePointer* mouse = new MousePointer();
 	void Attack(Object* target, bool isMinion);
 	void MoveToPosition(D3DVECTOR *position);
 	void MoveToTarget(Object* target);
 	std::vector<Object*> getAttackableUnitInRange();
 	float Distance(Object* A, Object* B);
-	float ClickerDelay = 0.1;
+	double ClickerDelay = 0.1;
 	float movetimer = 0;
 	float attacktimer = 0;
 	void ResetMoveTimer();
@@ -33,9 +32,13 @@ public:
 
 	bool AttackReady();
 
-	void Orbwalk(Object* Target);
+	void Orbwalk(Object* Target, bool hasTarget);
 
-	//typedef void(__thiscall* fnIssueOrder) (Object* thisPtr, DWORD dwOrder, D3DVECTOR* TargetPos, Object* TargetPtr, bool attackLoc, bool isPassive, DWORD isNetworked);
+	void LastHit();
+	void LaneClear();
+
+	bool CanMove();
+		//typedef void(__thiscall* fnIssueOrder) (Object* thisPtr, DWORD dwOrder, D3DVECTOR* TargetPos, Object* TargetPtr, bool attackLoc, bool isPassive, DWORD isNetworked);
 //	Move = 2,
 //		Attack = 3,
 //		Stop = 10,

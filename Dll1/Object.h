@@ -46,7 +46,8 @@ public:
 	int Index;
 	unsigned char Padding34[0x8];
 	int Team; // 100 = allies , 200 = ennemies , 300 = neutre
-	unsigned char Padding35[0x8];
+	int Champion;
+	unsigned char Padding35[0x4];
 	cString Name;
 	unsigned char Padding0[0xC8];
 	float X; //0x100
@@ -54,7 +55,7 @@ public:
 	float Z; 
 	unsigned char Padding2[0x56C];
 	float mHP;
-	unsigned char Padding3[0x538];
+	unsigned char Padding3[0x42C];
 	float AttackRange; //0xAA8
 
 	bool isMinion() {

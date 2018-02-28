@@ -58,7 +58,7 @@ std::vector<Object*> Orbwalker::getAttackableUnitInRange()
 		if (obj)
 		{
 			if (obj->mHP) {
-				if (Distance(this->player, obj) < 600 && obj->mHP>0) {
+				if (Distance(this->player, obj) < player->AttackRange && obj->mHP>0) {
 
 					
 					if (obj->Name.getString()) {
@@ -66,14 +66,14 @@ std::vector<Object*> Orbwalker::getAttackableUnitInRange()
 
 						if ((obj->Type->Type == 5 || obj->Type->Type == 3) && (obj->Team == 300||obj->Team==200)) {
 							objets.push_back(obj);
-							cout << "Name : " << nom << endl;
+							//cout << "Name : " << nom << endl;
 							float Delay = offsets->tGetAttackDelay(obj, i);
-							cout << "Attackdelay : " << Delay << endl;
+							/*cout << "Attackdelay : " << Delay << endl;
 							cout << "Team : " << obj->Team << endl;
 							cout << "Index : " << obj->Index << endl;
  							cout << "X : " << obj->X << endl;
 							cout << "Y : " << obj->Y << endl;
-							cout << "Z : " << player->Z << endl;
+							cout << "Z : " << player->Z << endl;*/
 						}
 
 					}
@@ -100,10 +100,12 @@ void Orbwalker::ResetAttackTimer()
 }
 double Orbwalker::CalcMoveDelay()
 {
+	cout << (offsets->getClock() - movetimer) << endl;
 	return (offsets->getClock() - movetimer);
 }
 double Orbwalker::CalcAttackDelay()
-{
+{ 
+	cout << (offsets->getClock() - attacktimer) << endl;
 	return (offsets->getClock() - attacktimer);
 }
 double Orbwalker::CalcAttackTime()
@@ -112,7 +114,9 @@ double Orbwalker::CalcAttackTime()
 }
 double Orbwalker::CalcWindup()
 {
+	cout << (offsets->tGetAttackCastDelay(player, 1)) / (offsets->tGetAttackDelay(player, 1)) << endl;
 	return (offsets->tGetAttackCastDelay(player, 1))/(offsets->tGetAttackDelay(player,1));
+
 }
 bool Orbwalker::MoveReady()
 {
@@ -135,27 +139,78 @@ bool Orbwalker::AttackReady()
 		return false;
 	}
 }
-void Orbwalker::Orbwalk(Object* Target)
-{
-	if (AttackReady() && getAttackableUnitInRange().size() > 0)
-	{
-		if (MoveReady())
-		{
-			Attack(Target, 1);
-			ResetAttackTimer();
+
+
+void Orbwalker::LaneClear() {
+	MousePointer* mouse = new MousePointer();
+	
+	if (getAttackableUnitInRange().size() > 0) {
+		for (Object* obj : getAttackableUnitInRange()) {
+			if (obj->Champion==5121 && offsets->getClock()+0.7>= attacktimer + offsets->tGetAttackDelay(player,1)) {
+				cout << "champ :" << obj->Champion << endl;
+				cout << "champ :" << obj->Name.getString() << endl;
+				attacktimer = offsets->getClock();
+				movetimer = offsets->getClock();
+				Attack(obj, 1);
+				break;
+			}
 		}
 	}
-	if (!AttackReady() && getAttackableUnitInRange().size() > 0)
-	{
-		if (CalcAttackDelay() > CalcWindup())
+
+	if (offsets->getClock() + 0.7 >= movetimer + offsets->tGetAttackCastDelay(player, 1)){
+		MoveToPosition(mouse->mousePos);
+	}
+}
+
+void Orbwalker::LastHit() {
+	MousePointer* mouse = new MousePointer();
+	if (getAttackableUnitInRange().size() > 0) {
+		for (Object* obj : getAttackableUnitInRange()) {
+			if (obj->mHP < 100 && offsets->getClock() >= attacktimer + offsets->tGetAttackDelay(player, 1)) {
+				attacktimer = offsets->getClock();
+				movetimer = offsets->getClock();
+				Attack(obj, 1);
+				break;
+			}
+		}
+	}
+
+
+	if (offsets->getClock() + 0.5 >= movetimer + offsets->tGetAttackCastDelay(player, 1)) {
+		MoveToPosition(mouse->mousePos);
+	}
+}
+
+void Orbwalker::Orbwalk(Object* Target, bool hasTarget)
+{
+	MousePointer* mouse = new MousePointer();
+	if (!hasTarget) {
+			MoveToPosition(mouse->mousePos);
+			
+
+	}
+	else {
+		if (AttackReady() && getAttackableUnitInRange().size() > 0)
 		{
+			if (MoveReady())
+			{
+				Attack(Target, 1);
+				ResetAttackTimer();
+			}
+		}
+		if (!AttackReady() && getAttackableUnitInRange().size() > 0)
+		{
+			if (CalcAttackDelay() > CalcWindup())
+			{
 				MoveToPosition(mouse->mousePos);
 				ResetMoveTimer();
+			}
+		}
+		if (MoveReady() && getAttackableUnitInRange().size() < 1)
+		{
+			MoveToPosition(mouse->mousePos);
+			ResetMoveTimer();
 		}
 	}
-	if (MoveReady() && getAttackableUnitInRange().size() < 1)
-	{
-		MoveToPosition(mouse->mousePos);
-		ResetMoveTimer();
-	}
+
 }
