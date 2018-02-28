@@ -13,7 +13,7 @@ public:
 	DWORD oLocalPlayer = base + 0x2DB1060;
 	DWORD ObjManager = base + 0x2dABF80;
 	DWORD oChatClientPtr = base + 0x31B7C98;
-	DWORD oGameTime = base + 0x31A6D24;
+	DWORD oGameTime = base + 0x2DA92FC;
 	DWORD oRenderer = base + 0x31D4AA0;
 	DWORD oZoomBase = base + 0x31A6C80;
 	DWORD oUnderMouseObj = base + 0x25506FC;
@@ -24,6 +24,9 @@ public:
 	DWORD oMousePointer = base + 0x1504D80;
 	DWORD oTexturePack = base + 0x31B2E18;
 
+	float getClock() {
+		return *(float*)(oGameTime);
+	}
 
 	//Conventions
 	typedef float(__fastcall* fnGetBoundingRadius)(Object* thisPtr, double* result);

@@ -1,10 +1,4 @@
-﻿  MousePointer.cpp
-  Génération de code en cours...
-  Ignoré... (aucune modification pertinente détectée)
-  ObjectManager.cpp
-  Object.cpp
-  dllmain.cpp
-  Player.cpp
-  Orbwalk.cpp
-  Offsets.cpp
+﻿  dllmain.cpp
+c:\users\walid\source\repos\dll1\dll1\dllmain.cpp(56): warning C4018: '<' : incompatibilité signed/unsigned
+c:\users\walid\source\repos\dll1\dll1\dllmain.cpp(59): warning C4244: 'argument' : conversion de 'float' en 'DWORD', perte possible de données
   Dll1.vcxproj -> C:\Users\Walid\source\repos\Dll1\Debug\Dll1.dll

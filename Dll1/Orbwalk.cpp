@@ -85,10 +85,77 @@ std::vector<Object*> Orbwalker::getAttackableUnitInRange()
 
 		}
 	}
-	cout << "Team : " << player->Team << endl;
-	cout << "Taille : " << objets.size() << endl;
-	cout << "Index : " << player->Index << endl;
-	float Delay = offsets->tGetAttackDelay(player, 1);
-	cout << "Attackdelay : " << Delay << endl;
 	return objets;
+}
+
+static double ClickerDelay = 0.1;
+
+void Orbwalker::ResetMoveTimer()
+{
+	movetimer = offsets->getClock();
+}
+void Orbwalker::ResetAttackTimer()
+{
+	attacktimer = offsets->getClock();
+}
+double Orbwalker::CalcMoveDelay()
+{
+	return (offsets->getClock() - movetimer);
+}
+double Orbwalker::CalcAttackDelay()
+{
+	return (offsets->getClock() - attacktimer);
+}
+double Orbwalker::CalcAttackTime()
+{
+	return offsets->tGetAttackDelay(player, 1);
+}
+double Orbwalker::CalcWindup()
+{
+	return (offsets->tGetAttackCastDelay(player, 1))/(offsets->tGetAttackDelay(player,1));
+}
+bool Orbwalker::MoveReady()
+{
+	if (CalcMoveDelay() > ClickerDelay)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+bool Orbwalker::AttackReady()
+{
+	if (CalcAttackDelay() > CalcAttackTime())
+	{
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+void Orbwalker::Orbwalk(Object* Target)
+{
+	if (AttackReady() && getAttackableUnitInRange().size() > 0)
+	{
+		if (MoveReady())
+		{
+			Attack(Target, 1);
+			ResetAttackTimer();
+		}
+	}
+	if (!AttackReady() && getAttackableUnitInRange().size() > 0)
+	{
+		if (CalcAttackDelay() > CalcWindup())
+		{
+				MoveToPosition(mouse->mousePos);
+				ResetMoveTimer();
+		}
+	}
+	if (MoveReady() && getAttackableUnitInRange().size() < 1)
+	{
+		MoveToPosition(mouse->mousePos);
+		ResetMoveTimer();
+	}
 }
