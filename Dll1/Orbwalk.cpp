@@ -22,15 +22,39 @@ void Orbwalker::MoveToPosition(D3DVECTOR* position)
 	float X = this->player->X;
 	float Y = this->player->Y;
 	float Z = this->player->Z;
-
-	if (position->y < 150 && position->x >500 && position->z > 500) {
+	D3DVECTOR* pos = new D3DVECTOR(X, Y, Z);
+	MousePointer* mouse = new MousePointer();
+	
+	if (this->Distance(pos, mouse->mousePos)>=80) {
 		offsets->tIssueOrder(this->player, 2, position, nullptr, 0, 0, 0);
 	}
 
 
 
 }
+//return self:Time() - OMenu.Adv.AAD:Value() + GetLatency()*.5 - self.LastAttack >= (1000/(GetAttackSpeed(myHero)*self.BaseAttackSpeed))
+//return self:Time() - OMenu.Adv.MD : Value() + GetLatency()*.5 - self.LastAttack >= (1000 / (GetAttackSpeed(myHero)*self.BaseWindUp))
+//self.BaseWindUp = 1 / (spellProc.windUpTime * GetAttackSpeed(myHero))
+//self.BaseAttackSpeed = 1 / (spellProc.animationTime * GetAttackSpeed(myHero))
+bool Orbwalker::CanMove() {
 
+	float BaseWindUp = offsets->tGetAttackCastDelay(player, 1) ;
+	if (player->mAttackSpeedMod > 2) {
+		return offsets->getClock() - this->movetimer + 0.2 >= BaseWindUp;
+	}
+	else {
+		return offsets->getClock() - this->movetimer +0.2 >= BaseWindUp/offsets->tGetAttackDelay(player,1);
+	}
+	cout << "AttackCastDelay : " << offsets->tGetAttackCastDelay(player, 1) << endl; 
+}
+
+bool Orbwalker::CanAttack() {
+	float BaseAnimationTime = 1/ (player->mAttackSpeedMod / offsets->tGetAttackDelay(player, 1));
+	 
+	return offsets->getClock() - this->attacktimer + 0.3 >= BaseAnimationTime;
+	
+	
+}
 void Orbwalker::MoveToTarget(Object * target)
 {
 	Offsets *offsets = new Offsets();
@@ -41,6 +65,14 @@ float Orbwalker::Distance(Object* A, Object* B) {
 	float dist = 0;
 
 	dist = sqrt((A->X - B->X)*(A->X - B->X) + (A->Y - B->Y)*(A->Y - B->Y) + (A->Z - B->Z)*(A->Z - B->Z));
+
+	return dist;
+}
+
+float Orbwalker::Distance(D3DVECTOR* A, D3DVECTOR* B) {
+	float dist = 0;
+
+	dist = sqrt((A->x - B->x)*(A->x - B->x) + (A->y - B->y)*(A->y - B->y) + (A->z - B->z)*(A->z - B->z));
 
 	return dist;
 }
@@ -146,7 +178,7 @@ void Orbwalker::LaneClear() {
 	
 	if (getAttackableUnitInRange().size() > 0) {
 		for (Object* obj : getAttackableUnitInRange()) {
-			if (obj->Champion==5121 && offsets->getClock()+0.8>= attacktimer + offsets->tGetAttackDelay(player,1)) {
+			if (obj->Champion==5121 && this->CanAttack()) {
 				cout << "champ :" << obj->Champion << endl;
 				cout << "champ :" << obj->Name.getString() << endl;
 				attacktimer = offsets->getClock();
@@ -157,8 +189,9 @@ void Orbwalker::LaneClear() {
 		}
 	}
 
-	if (offsets->getClock() + 0.7 >= movetimer + offsets->tGetAttackCastDelay(player, 1)){
+	if (this->CanMove()){
 		MoveToPosition(mouse->mousePos);
+	
 	}
 }
 
@@ -166,7 +199,7 @@ void Orbwalker::LastHit() {
 	MousePointer* mouse = new MousePointer();
 	if (getAttackableUnitInRange().size() > 0) {
 		for (Object* obj : getAttackableUnitInRange()) {
-			if (obj->mHP < 100 && offsets->getClock() >= attacktimer + offsets->tGetAttackDelay(player, 1)) {
+			if (obj->mHP < 100 && this->CanAttack()) {
 				attacktimer = offsets->getClock();
 				movetimer = offsets->getClock();
 				Attack(obj, 1);
@@ -176,7 +209,7 @@ void Orbwalker::LastHit() {
 	}
 
 
-	if (offsets->getClock() + 0.5 >= movetimer + offsets->tGetAttackCastDelay(player, 1)) {
+	if (this->CanMove()) {
 		MoveToPosition(mouse->mousePos);
 	}
 }

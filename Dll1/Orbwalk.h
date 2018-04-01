@@ -14,12 +14,14 @@ public:
 	void MoveToTarget(Object* target);
 	std::vector<Object*> getAttackableUnitInRange();
 	float Distance(Object* A, Object* B);
+	float Distance(D3DVECTOR* A, D3DVECTOR * B);
 	double ClickerDelay = 0.1;
 	float movetimer = 0;
 	float attacktimer = 0;
 	void ResetMoveTimer();
 	void ResetAttackTimer();
-
+	bool CanMove();
+	bool CanAttack();
 	double CalcMoveDelay();
 
 	double CalcAttackDelay();
@@ -37,7 +39,6 @@ public:
 	void LastHit();
 	void LaneClear();
 
-	bool CanMove();
 		//typedef void(__thiscall* fnIssueOrder) (Object* thisPtr, DWORD dwOrder, D3DVECTOR* TargetPos, Object* TargetPtr, bool attackLoc, bool isPassive, DWORD isNetworked);
 //	Move = 2,
 //		Attack = 3,

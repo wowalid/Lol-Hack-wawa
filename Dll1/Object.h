@@ -57,7 +57,8 @@ public:
 	float mHP;
 	unsigned char Padding3[0x42C];
 	float AttackRange; //0xAA8
-
+	unsigned char Padding4[0x474];
+	float mAttackSpeedMod; // 0xF20
 	bool isMinion() {
 		if (Team == 200 && Type->Type == 5) {
 			return true;
